@@ -1,0 +1,44 @@
+﻿@model IEnumerable<consumirAPI.Models.Produto>
+
+@{
+    ViewData["Title"] = "Lista de Produtos";
+}
+
+<h1>Lista de Produtos</h1>
+
+<p>
+    <a href="@Url.Action( "Create", "Home")" class="btn btn-primary">Adicionar Novo Produto</a>
+    <a href="@Url.Action("Login", "Home")" class="btn btn-primary">Login</a>
+</p>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var produto in Model)
+            {
+                <tr>
+                    <td>@produto.Id</td>
+                    <td>@produto.Nome</td>
+                    <td>@produto.Preco.ToString("C")</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Produtos", new { id = produto.Id })" class="btn btn-warning">Editar</a>
+                        <a href="@Url.Action("Delete", "Produtos", new { id = produto.Id })" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Nenhum produto encontrado.</p>
+}
